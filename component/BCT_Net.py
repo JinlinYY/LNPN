@@ -12,16 +12,15 @@ class Classifier(nn.Module):
         self.linear4 = nn.Linear(128, 64)
         self.bn4 = nn.BatchNorm1d(64)
         self.classifier = nn.Linear(64, output_size)
-        self.dropout = nn.Dropout(0.5)  # 添加Dropout层，防止过拟合
-
+        self.dropout = nn.Dropout(0.5)  
     def forward(self, x):
         x = F.relu(self.bn1(self.linear1(x)))
-        x = self.dropout(x)  # 在第一层后添加Dropout
+        x = self.dropout(x)  
         x = F.relu(self.bn2(self.linear2(x)))
-        x = self.dropout(x)  # 在第二层后添加Dropout
+        x = self.dropout(x)  
         x = F.relu(self.bn3(self.linear3(x)))
-        x = self.dropout(x)  # 在第三层后添加Dropout
+        x = self.dropout(x)  
         x = F.relu(self.bn4(self.linear4(x)))
-        x = self.dropout(x)  # 在第四层后添加Dropout
+        x = self.dropout(x)  
         out = self.classifier(x)
         return out
